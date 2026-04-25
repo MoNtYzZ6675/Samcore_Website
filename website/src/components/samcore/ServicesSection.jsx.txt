@@ -1,0 +1,118 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { ChevronRight, Droplets, Building2, HardHat, Factory } from 'lucide-react';
+
+const services = [
+  {
+    num: '01',
+    icon: Droplets,
+    title: 'Residential',
+    subtitle: 'Home Water Solutions',
+    description: 'Reliable bulk water delivery for homeowners and rural properties across Alberta.',
+    capabilities: ['Pool & Hot Tub Filling', 'Cistern Refills', 'Well Supplementation', 'Landscaping & Irrigation', 'Emergency Supply'],
+  },
+  {
+    num: '02',
+    icon: Building2,
+    title: 'Commercial',
+    subtitle: 'Business Operations',
+    description: 'Consistent water supply solutions for commercial facilities and business operations.',
+    capabilities: ['Water Storage Tank Filling', 'Temporary Event Supply', 'Car Wash Supply', 'Agricultural Operations', 'Hospitality & Resorts'],
+  },
+  {
+    num: '03',
+    icon: HardHat,
+    title: 'Construction',
+    subtitle: 'Project Support',
+    description: 'On-demand bulk water for construction sites requiring dust control and concrete mixing.',
+    capabilities: ['Dust Suppression', 'Concrete Mixing Supply', 'Soil Compaction', 'Hydroseeding', 'Site Preparation'],
+  },
+  {
+    num: '04',
+    icon: Factory,
+    title: 'Industrial',
+    subtitle: 'Heavy-Duty Solutions',
+    description: 'High-volume water hauling for industrial operations, drilling and pipeline projects.',
+    capabilities: ['Oil & Gas Operations', 'Pipeline Testing', 'Drilling Operations', 'Frac Water Supply', 'Plant Shutdowns'],
+  },
+];
+
+function ServiceCard({ service, isExpanded, onToggle }) {
+  const Icon = service.icon;
+
+  return (
+    <motion.div
+      layout
+      onClick={onToggle}
+      className="group cursor-pointer border-2 border-border hover:border-primary/40 bg-card rounded-lg overflow-hidden transition-colors duration-500"
+    >
+      <div className="p-6 lg:p-8">
+        <div className="flex items-start justify-between mb-6">
+          <span className="font-mono text-primary/60 text-sm tracking-widest">{service.num}</span>
+          <Icon className="w-6 h-6 text-primary" />
+        </div>
+        <h3 className="font-heading font-bold text-2xl text-foreground mb-1">{service.title}</h3>
+        <p className="text-sm text-primary font-medium tracking-wide uppercase mb-4">{service.subtitle}</p>
+        <p className="text-muted-foreground font-body leading-relaxed text-sm">{service.description}</p>
+      </div>
+
+      <motion.div
+        initial={false}
+        animate={{ height: isExpanded ? 'auto' : 0, opacity: isExpanded ? 1 : 0 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="overflow-hidden"
+      >
+        <div className="px-6 lg:px-8 pb-6 lg:pb-8 border-t border-border pt-6">
+          <p className="text-xs text-primary font-heading font-semibold tracking-[0.2em] uppercase mb-4">Capabilities</p>
+          <ul className="space-y-3">
+            {service.capabilities.map((cap, i) => (
+              <li key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
+                <ChevronRight className="w-4 h-4 text-primary flex-shrink-0" />
+                {cap}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+export default function ServicesSection({ servicesImage }) {
+  const [expanded, setExpanded] = useState(null);
+
+  return (
+    <section id="services" className="py-24 lg:py-32 border-t border-border">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-start mb-16">
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-12 bg-primary" />
+              <span className="text-primary font-heading font-semibold text-sm tracking-[0.25em] uppercase">What We Do</span>
+            </div>
+            <h2 className="font-heading font-extrabold text-4xl md:text-5xl text-foreground leading-tight">
+              Purpose-Built
+              <br />
+              Water Solutions
+            </h2>
+          </div>
+          <p className="text-muted-foreground font-body text-lg leading-relaxed lg:pt-12">
+            From a single residential pool fill to multi-week industrial supply contracts, 
+            Samcore delivers the right volume at the right time. Every load. Every time.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {services.map((service, i) => (
+            <ServiceCard
+              key={service.num}
+              service={service}
+              isExpanded={expanded === i}
+              onToggle={() => setExpanded(expanded === i ? null : i)}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

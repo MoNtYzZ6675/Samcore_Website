@@ -1,0 +1,77 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const stats = [
+  { value: '24/7', label: 'Dispatch Available' },
+  { value: '100%', label: 'Licensed & Insured' },
+  { value: 'AB', label: 'Alberta Based' },
+];
+
+export default function AboutSection({ aboutImage }) {
+  return (
+    <section id="about" className="py-24 lg:py-32 bg-secondary border-t border-border">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="relative">
+              <img
+                src={aboutImage}
+                alt="Fleet of Samcore bulk water tanker trucks at dawn"
+                className="rounded-lg w-full object-cover aspect-video"
+              />
+              <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-white/10" />
+              {/* Overlay Stats Bar */}
+              <div className="absolute bottom-0 left-0 right-0 bg-background/90 backdrop-blur-sm rounded-b-lg">
+                <div className="grid grid-cols-3 divide-x divide-border">
+                  {stats.map((stat, i) => (
+                    <div key={i} className="p-4 text-center">
+                      <p className="font-heading font-extrabold text-xl text-primary">{stat.value}</p>
+                      <p className="text-[10px] text-muted-foreground tracking-wider uppercase mt-1">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-12 bg-primary" />
+              <span className="text-primary font-heading font-semibold text-sm tracking-[0.25em] uppercase">About Samcore</span>
+            </div>
+            <h2 className="font-heading font-extrabold text-4xl md:text-5xl text-foreground leading-tight mb-8">
+              Established.<br />Reliable.<br />Alberta-Built.
+            </h2>
+            <div className="space-y-5 text-muted-foreground font-body leading-relaxed">
+              <p>
+                Samcore Transportation Services Inc. is an Edmonton-based bulk water hauling company 
+                built on a simple principle: when you need water delivered, it has to be done right, 
+                on time, and without compromise.
+              </p>
+              <p>
+                We serve the full spectrum of water delivery needs—from filling residential pools 
+                and cisterns to supporting large-scale industrial and construction operations 
+                across the greater Edmonton region.
+              </p>
+              <p>
+                Our modern fleet, experienced operators, and commitment to safety and environmental 
+                responsibility make us the trusted choice for customers who demand professional, 
+                dependable service every time.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}

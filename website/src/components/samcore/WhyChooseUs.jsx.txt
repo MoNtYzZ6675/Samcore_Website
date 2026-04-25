@@ -1,0 +1,80 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Shield, Clock, Award, Gauge, Users, Leaf } from 'lucide-react';
+
+const reasons = [
+  {
+    icon: Shield,
+    title: 'Fully Licensed & Insured',
+    description: 'Complete compliance with all Alberta transportation and environmental regulations.',
+  },
+  {
+    icon: Clock,
+    title: '24/7 Availability',
+    description: 'Round-the-clock dispatch for emergency and time-critical water delivery needs.',
+  },
+  {
+    icon: Award,
+    title: 'Industry Experience',
+    description: 'Years of proven expertise serving Alberta\'s most demanding industrial and construction projects.',
+  },
+  {
+    icon: Gauge,
+    title: 'High-Volume Capacity',
+    description: 'Modern fleet of bulk tankers engineered to deliver maximum volume efficiently and safely.',
+  },
+  {
+    icon: Users,
+    title: 'Dedicated Support',
+    description: 'A single point of contact for your project. Professional coordination from quote to completion.',
+  },
+  {
+    icon: Leaf,
+    title: 'Environmental Standards',
+    description: 'Committed to responsible water handling practices and environmental stewardship.',
+  },
+];
+
+export default function WhyChooseUs() {
+  return (
+    <section id="why-us" className="py-24 lg:py-32 bg-secondary border-t border-border">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="h-px w-12 bg-primary" />
+            <span className="text-primary font-heading font-semibold text-sm tracking-[0.25em] uppercase">Why Samcore</span>
+            <div className="h-px w-12 bg-primary" />
+          </div>
+          <h2 className="font-heading font-extrabold text-4xl md:text-5xl text-foreground leading-tight">
+            Built for Reliability
+          </h2>
+          <p className="text-muted-foreground font-body text-lg leading-relaxed mt-6">
+            When your operation depends on water delivery, you need a partner that treats every load like it's mission-critical. That's the Samcore standard.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden">
+          {reasons.map((reason, i) => {
+            const Icon = reason.icon;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-card p-8 lg:p-10 group hover:bg-card/80 transition-colors duration-500"
+              >
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-500">
+                  <Icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-heading font-bold text-lg text-foreground mb-3">{reason.title}</h3>
+                <p className="text-muted-foreground font-body text-sm leading-relaxed">{reason.description}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

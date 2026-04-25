@@ -1,0 +1,89 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { MapPin, Navigation } from 'lucide-react';
+
+const areas = [
+  { name: 'Edmonton', primary: true },
+  { name: 'Sherwood Park', primary: false },
+  { name: 'St. Albert', primary: false },
+  { name: 'Spruce Grove', primary: false },
+  { name: 'Fort Saskatchewan', primary: false },
+  { name: 'Leduc', primary: false },
+  { name: 'Beaumont', primary: false },
+  { name: 'Stony Plain', primary: false },
+  { name: 'Devon', primary: false },
+  { name: 'Morinville', primary: false },
+  { name: 'Nisku', primary: false },
+  { name: 'Acheson', primary: false },
+];
+
+export default function ServiceArea({ areaImage }) {
+  return (
+    <section id="service-area" className="py-24 lg:py-32 border-t border-border relative overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src={areaImage}
+          alt="Alberta prairie landscape with industrial tanker"
+          className="w-full h-full object-cover opacity-15"
+        />
+        <div className="absolute inset-0 bg-background/80" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-12 bg-primary" />
+              <span className="text-primary font-heading font-semibold text-sm tracking-[0.25em] uppercase">Coverage</span>
+            </div>
+            <h2 className="font-heading font-extrabold text-4xl md:text-5xl text-foreground leading-tight mb-6">
+              Edmonton &<br />Surrounding Region
+            </h2>
+            <p className="text-muted-foreground font-body text-lg leading-relaxed mb-8">
+              Headquartered in Edmonton, we serve the greater capital region and beyond. 
+              Our fleet is strategically positioned for rapid response to your location.
+            </p>
+
+            <div className="flex items-center gap-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+              <Navigation className="w-5 h-5 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-sm font-heading font-semibold text-foreground">Extended service available</p>
+                <p className="text-xs text-muted-foreground mt-0.5">For projects beyond our primary area, contact us for custom routing.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="grid grid-cols-2 gap-3">
+              {areas.map((area, i) => (
+                <motion.div
+                  key={area.name}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  className={`flex items-center gap-3 p-4 rounded-lg border transition-colors duration-300 ${
+                    area.primary
+                      ? 'bg-primary/10 border-primary/30'
+                      : 'bg-card border-border hover:border-primary/20'
+                  }`}
+                >
+                  <MapPin className={`w-4 h-4 flex-shrink-0 ${area.primary ? 'text-primary' : 'text-muted-foreground'}`} />
+                  <span className={`text-sm font-medium ${area.primary ? 'text-primary' : 'text-foreground'}`}>
+                    {area.name}
+                  </span>
+                  {area.primary && (
+                    <span className="text-[10px] bg-primary text-primary-foreground px-2 py-0.5 rounded font-heading font-semibold tracking-wider uppercase ml-auto">
+                      HQ
+                    </span>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

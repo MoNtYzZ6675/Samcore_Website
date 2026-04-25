@@ -1,0 +1,29 @@
+import React from 'react';
+import Navbar from '../components/samcore/Navbar';
+import HeroSection from '../components/samcore/HeroSection';
+import ServicesSection from '../components/samcore/ServicesSection';
+import WhyChooseUs from '../components/samcore/WhyChooseUs';
+import ServiceArea from '../components/samcore/ServiceArea';
+import AboutSection from '../components/samcore/AboutSection';
+import QuoteForm from '../components/samcore/QuoteForm';
+import Footer from '../components/samcore/Footer';
+
+const HERO_IMAGE = 'https://media.base44.com/images/public/69ecab9fbcac8af472ec4597/c0a830d18_generated_64c7c732.png';
+const ABOUT_IMAGE = 'https://media.base44.com/images/public/69ecab9fbcac8af472ec4597/f32dbf208_generated_c1ee394b.png';
+const SERVICES_IMAGE = 'https://media.base44.com/images/public/69ecab9fbcac8af472ec4597/c02f11a62_generated_f3a303e4.png';
+const AREA_IMAGE = 'https://media.base44.com/images/public/69ecab9fbcac8af472ec4597/31857732a_generated_e7e8c486.png';
+
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-background font-body">
+      <Navbar />
+      <HeroSection heroImage={HERO_IMAGE} />
+      <ServicesSection servicesImage={SERVICES_IMAGE} />
+      <WhyChooseUs />
+      <ServiceArea areaImage={AREA_IMAGE} />
+      <AboutSection aboutImage={ABOUT_IMAGE} />
+      <QuoteForm />
+      <Footer />
+    </div>
+  );
+}
